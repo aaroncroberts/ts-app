@@ -1,0 +1,44 @@
+{
+  "name": "@aaron/ts-library",
+  "version": "1.0.0",
+  "description": "A TypeScript library",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaron/ts-app.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm clean && pnpm compile:esm && pnpm compile:cjs",
+    "clean": "rm -rf dist coverage",
+    "compile:esm": "tsc -p tsconfig.esm.json",
+    "compile:cjs": "tsc -p tsconfig.cjs.json",
+    "lint": "eslint . --ext .ts",
+    "package": "pnpm pack",
+    "prepublishOnly": "pnpm build && pnpm test",
+    "test": "jest"
+  },
+  "keywords": [
+    "typescript",
+    "library"
+  ],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/aaron/ts-app#readme",
+  "bugs": {
+    "url": "https://github.com/aaron/ts-app/issues"
+  }
+}

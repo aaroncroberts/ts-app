@@ -1,0 +1,63 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:base"
+    ],
+    "packageRules": [
+        {
+            "matchPackagePatterns": [
+                "@types/"
+            ],
+            "groupName": "type definitions",
+            "addLabels": [
+                "dependencies",
+                "types"
+            ]
+        },
+        {
+            "matchPackagePatterns": [
+                "eslint",
+                "prettier",
+                "@typescript-eslint/"
+            ],
+            "groupName": "linting tools",
+            "addLabels": [
+                "dependencies",
+                "linting"
+            ]
+        },
+        {
+            "matchPackagePatterns": [
+                "jest",
+                "@jest/",
+                "ts-jest"
+            ],
+            "groupName": "testing tools",
+            "addLabels": [
+                "dependencies",
+                "testing"
+            ]
+        },
+        {
+            "matchDepTypes": [
+                "devDependencies"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        }
+    ],
+    "schedule": [
+        "before 6am on Monday"
+    ],
+    "timezone": "America/New_York",
+    "labels": [
+        "dependencies"
+    ],
+    "assignees": [
+        "@me"
+    ],
+    "reviewers": [
+        "@me"
+    ]
+}

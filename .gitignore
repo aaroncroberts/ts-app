@@ -1,0 +1,53 @@
+# Dependencies
+/node_modules
+**/node_modules
+
+# Build output
+/dist
+**/dist
+/coverage
+**/coverage
+*.tsbuildinfo
+
+# Next.js (docs-site)
+docs-site/.next/
+docs-site/out/
+docs-site/.env*.local
+
+# Package artifacts
+*.tgz
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+.tmp/
+.cache/
+

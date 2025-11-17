@@ -1,0 +1,35 @@
+{
+  "name": "ts-library-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter=@aaron/ts-library build",
+    "clean": "pnpm --recursive clean && rm -rf docs-site/.next docs-site/out packages/*/dist packages/*/coverage",
+    "docs:dev": "cd docs-site && npm run dev",
+    "docs:build": "cd docs-site && npm run build",
+    "docs:start": "cd docs-site && npm run start",
+    "lint": "eslint . --ext .ts && markdownlint \"./*.md\" \"packages/**/*.md\" --ignore-path .markdownlint-ignore",
+    "start": "pnpm --filter=example-app start",
+    "test": "pnpm --recursive test",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "package": "pnpm build && pnpm --filter=@aaron/ts-library package"
+  },
+  "keywords": [
+    "typescript",
+    "library"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.12",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "audit-ci": "^7.1.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "markdownlint-cli": "^0.45.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "example-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "prestart": "pnpm --filter=@aaron/ts-library build",
+    "test": "echo \"No tests for example app\""
+  },
+  "dependencies": {
+    "@aaron/ts-library": "workspace:*"
+  }
+}

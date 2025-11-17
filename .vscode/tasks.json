@@ -1,0 +1,186 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Library",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "build"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "detail": "Build the ts-library package"
+    },
+    {
+      "label": "Run Example App",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "start"
+      ],
+      "group": "none",
+      "problemMatcher": [],
+      "detail": "Run the example console application"
+    },
+    {
+      "label": "Test All",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "test"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Run all tests in the workspace"
+    },
+    {
+      "label": "Lint All",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "lint"
+      ],
+      "problemMatcher": [
+        "$eslint-compact"
+      ],
+      "detail": "Lint TypeScript and Markdown files"
+    },
+    {
+      "label": "Type Check All",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "typecheck"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "detail": "Type check the entire workspace"
+    },
+    {
+      "label": "Clean All",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "clean"
+      ],
+      "problemMatcher": [],
+      "detail": "Clean all build artifacts"
+    },
+    {
+      "label": "Package Library",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "package"
+      ],
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Build and create package tarball for distribution"
+    },
+    {
+      "label": "Docs: Dev Server",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "docs:dev"
+      ],
+      "group": "none",
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "detail": "Start documentation development server on http://localhost:3001"
+    },
+    {
+      "label": "Docs: Build Production",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "docs:build"
+      ],
+      "group": "build",
+      "problemMatcher": [
+        "$eslint-compact"
+      ],
+      "detail": "Build documentation site for production"
+    },
+    {
+      "label": "Docs: Start Production",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "docs:start"
+      ],
+      "group": "none",
+      "problemMatcher": [],
+      "dependsOn": "Docs: Build Production",
+      "detail": "Start production documentation server"
+    },
+    {
+      "label": "Dev: Full Stack",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "Docs: Dev Server"
+      ],
+      "group": "none",
+      "detail": "Start both documentation development server"
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": "pnpm",
+      "args": [
+        "install"
+      ],
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Install all workspace dependencies"
+    },
+    {
+      "label": "Docs: Install Dependencies",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "install"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/docs-site"
+      },
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Install docs-site dependencies"
+    },
+    {
+      "label": "Docs: Lint",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "lint"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/docs-site"
+      },
+      "problemMatcher": [
+        "$eslint-compact"
+      ],
+      "detail": "Lint documentation site code"
+    }
+  ]
+}

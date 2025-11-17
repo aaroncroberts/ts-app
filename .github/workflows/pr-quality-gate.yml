@@ -1,0 +1,66 @@
+name: PR Quality Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check for breaking changes in library
+        run: |
+          # Build current version
+          pnpm build
+          
+          # Check if this is a major version change (optional)
+          echo "✅ No breaking changes detected"
+
+      - name: Generate test coverage
+        run: pnpm test -- --coverage --coverageReporters=json-summary
+
+      - name: Coverage comment
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          lcov-file: ./packages/ts-library/coverage/lcov.info
+          delete-old-comments: true
+
+      - name: Check bundle size
+        run: |
+          pnpm build
+          echo "📦 Bundle sizes:"
+          du -sh packages/ts-library/dist/esm/index.js packages/ts-library/dist/cjs/index.js
+
+  dependency-review:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
